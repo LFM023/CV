@@ -12,7 +12,7 @@ github: LFM023
 linkedin: philippe-fontaine-ds
 always_allow_html: true
 date: "`r format(Sys.time(), '%B %Y')`"
-aboutme: "Data Scientist depuis 8 ans, je suis passioné par la valorisation de l'information et par l'exploitation de données. Véritable moteur dans la conduite du changement et dans l'innovation, je cherche constamment à transformer les organisation afin d'accroître la productivité globale. Spécialisé depuis deux ans dans le développement d'applications Shiny, je traite des sujets d'une diversité particulièrement marquée, de la lutte contre la fraude à la conception d'outils de gestion RH."
+aboutme: "Data Scientist depuis 8 ans, je suis passionné par la valorisation de l'information et par l'exploitation de données. Véritable moteur dans la conduite du changement et dans l'innovation, je cherche constamment à transformer les organisation afin d'accroître la productivité globale. Spécialisé depuis deux ans dans le développement d'applications Shiny, je traite des sujets d'une diversité particulièrement marquée, de la lutte contre la fraude à la conception d'outils de gestion RH."
 output: vitae::twentyseconds
 dummy: "`<style>body {text-align: justify; color: green}</style>`{cat, engine.opts=list(file='header.html')}"
 ---

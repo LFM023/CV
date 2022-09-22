@@ -1,0 +1,208 @@
+---
+name: Philippe
+surname: Fontaine
+position: "Data Scientist"
+address: "58 rue de Bercy, 75012 PARIS"
+phone: +33 06 59 20 75 40
+profilepic: philippe.jpg
+www: philippefontaine.netlify.com
+email: "philippefontaine.ds@proton.me"
+twitter: PFontaineDS
+github: LFM023
+linkedin: philippe-fontaine-ds
+always_allow_html: true
+date: "`r format(Sys.time(), '%B %Y')`"
+aboutme: "Data Scientist depuis 8 ans, je suis passioné par l'innovation et l'exploitation de données afin d'éclairer les décideurs."
+output: vitae::twentyseconds
+dummy: "`<style>body {text-align: justify; color: green}</style>`{cat, engine.opts=list(file='header.html')}"
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+```
+
+# About me by OpenAi
+
+```{r, results='asis'}
+library(openai)
+library(tibble)
+request <- create_completion(
+  engine_id = "text-davinci-002",
+  prompt = "Describe Philippe, a data scientist with 8 years of work, interested by innovation, technologies and solving problems",
+  openai_api_key = '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',
+  max_tokens = 200,
+  temperature = 1.5
+)
+cat(request$choices$text)
+```
+[^1]
+
+[^1]: Ce texte a été généré automatiquement à partir de l'API OpenAI et du modèle GPT-3 (text-davinci-002). Ainsi, à chaque génération de ce CV, le résumé est modifié. 
+
+# Expérience
+
+```{r}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "Data Scientist senior - Économiste", "2021-2022", "Inspection Générale des Finances", "Paris, France",
+  "Data Scientist - Fiscaliste", "2018-2021", "Direction Générale du Trésor", "Paris, France",
+  "Data Scientist - Statisticien", "2015-2018", "Insee", "Montrouge, France"
+) %>% 
+  detailed_entries(Degree, Year, Institution, Where)
+```
+
+# Formation
+
+```{r}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "Master 2 - Mathématiques appliquées, statistiques", "2021", "Ensai", "Rennes, France",
+  "Stasticien de l'Insee", "2013-2015", "Ensai", "Rennes, France",
+  "Classe préparatoire MPSI/MP", "2011-2012", "Lycée Alphonse Daudet", "Nîmes France"
+) %>% 
+  detailed_entries(Degree, Year, Institution, Where)
+```
+
+# Compétences
+
+```{r, fig.align = 'left',fig.pos = 'h',fig.width = 4}
+library(dplyr)
+library(ggplot2)
+library(stringr)
+
+comps <- c("R","Shiny","Python","SAS","SQL","HTML/JS","Economie","Data Science","Anglais")
+
+niv <- c(10,8,7,5,5,3,8,6.5,6)
+
+df <- as.data.frame(cbind(comps,niv))
+
+df$niv <- as.numeric(df$niv)
+
+plt <- ggplot(df) +
+  # Make custom panel grid
+  geom_hline(
+    aes(yintercept = y), 
+    data.frame(y = c(0:10) ),
+    color = "lightgrey"
+  ) + 
+  # Add bars to represent the cumulative track lengths
+  # str_wrap(region, 5) wraps the text so each line has at most 5 characters
+  # (but it doesn't break long words!)
+  geom_col(
+    aes(
+      x = reorder(str_wrap(comps, 5), niv),
+      y = niv,
+      fill = niv
+    ),
+    position = "dodge2",
+    show.legend = TRUE,
+    alpha = .9
+  ) +
+  
+  # Add dots to represent the mean gain
+  geom_point(
+    aes(
+      x = reorder(str_wrap(comps, 5),niv),
+      y = niv
+    ),
+    size = 3,
+    color = "gray12"
+  ) +
+  
+  # Lollipop shaft for mean gain per region
+  geom_segment(
+    aes(
+      x = reorder(str_wrap(comps, 5), niv),
+      y = 0,
+      xend = reorder(str_wrap(comps, 5), niv),
+      yend = 10
+    ),
+    linetype = "dashed",
+    color = "gray12"
+  ) + 
+  
+  # Make it circular!
+  coord_polar()
+
+plt <- plt +
+  # Annotate the bars and the lollipops so the reader understands the scaling
+
+  # Scale y axis so bars don't start in the center
+  scale_y_continuous(
+    limits = c(-2, 10),
+    expand = c(0, 0),
+    breaks = c(0:10)
+  ) + 
+  # New fill and legend title for number of tracks per region
+  scale_fill_gradientn(
+    "Niveau de maîtrise",
+    colours = c( "#004e92","#000428")
+  ) +
+  # Make the guide for the fill discrete
+  guides(
+    fill = guide_colorsteps(
+      barwidth = 15, barheight = .5, title.position = "top", title.hjust = .5
+    )
+  ) +
+  theme(
+    # Remove axis ticks and text
+    axis.title = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.y = element_blank(),
+    # Use gray text for the region names
+    axis.text.x = element_text(color = "gray12", size = 7),
+    # Move the legend to the bottom
+    legend.position = "bottom",
+  )
+
+plt <- plt + 
+  # Add labels
+  labs(
+    caption = "\n\nData Visualisation réalisée par Philippe Fontaine\nLibrement inspiré par Tobias Stalder\nSource: R-graph-gallery") +
+  # Customize general theme
+  theme(
+    
+    # Set default color and font family for the text
+    text = element_text(color = "gray12", family = "serif"),
+    
+    # Customize the text in the title, subtitle, and caption
+    
+    plot.caption = element_text(size = 8, hjust = .5),
+    
+    # Make the background white and remove extra grid lines
+    panel.background = element_rect(fill = "white", color = "white"),
+    panel.grid = element_blank(),
+    panel.grid.major.x = element_blank()
+  )
+# Use `ggsave("plot.png", plt,width=9, height=12.6)` to save it as in the output
+plt
+```
+
+```{=tex}
+\newpage
+\makeprofileto
+```
+# Applications développées
+
+-   Gestion et pilotage RH pour l'Inspection Générale des Finances *(confidentiel)*
+-   Visualisation des crimes et délits sur le territoire national *(en cours)*
+-   Visualisation des thèses réalisées sur des sujets relatif aux éléments du [groupe d'Australie](https://www.dfat.gov.au/publications/minisite/theaustraliagroupnet/site/fr/listescommunes.html) *(en cours)*
+-   Suivi des tweets relatifs aux éléments du [groupe d'Australie](https://www.dfat.gov.au/publications/minisite/theaustraliagroupnet/site/fr/listescommunes.html) *(en cours)*
+
+# Centres d'intérêts
+<!---
+TODO : generate graph here
+-->
+![Principaux centres d\'intérêts, librement inspiré par Yan Holtz](images/Capture.PNG){width="500" height="341"}]
+
+# Code source
+Ce CV a été réalisé à l'aide du package [vitae](https://cran.r-project.org/web/packages/vitae/index.html). Le code source associé est disponible sous GitHub.

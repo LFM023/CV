@@ -170,6 +170,7 @@
 		\ifthenelse{\equal{\aboutme}{}}{}{
 			\profilesection{A propos}
 			\begin{flushleft}
+			 	\justifying
 				\aboutme
 			\end{flushleft}
 		}
@@ -228,9 +229,9 @@
 
 		%------------------------------------------------
 
-		\profilesection{Compétences}
+		\profilesection{Thématiques abordées}
 
-		\skills{{R/6},{Shiny/5.5},{Python/4.7},{HTML, JS/2},{Economie/5.5},{Anglais/4.5},{Cartographie/4},{Comptabilité/4},{Fiscalité/3.5},{Docker, Kubernetes/2}}
+		\skills{{Fiscalité internationale/4},{Lutte contre la fraude/4},{Développement en self/4},{Analyse économique/6},{Exploitation de données massives/5},{Evaluation des politiques publiques/6},{Négociation/4},{Gestion de projet/4},{Finances publiques/6},{Secteur public/5}}
 
 
 

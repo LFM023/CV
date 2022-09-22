@@ -12,7 +12,7 @@ github: LFM023
 linkedin: philippe-fontaine-ds
 always_allow_html: true
 date: "`r format(Sys.time(), '%B %Y')`"
-aboutme: "Data Scientist depuis 8 ans, je suis passioné par l'innovation et l'exploitation de données afin d'éclairer les décideurs."
+aboutme: "Data Scientist depuis 8 ans, je suis passioné par la valorisation de l'information et par l'exploitation de données. Véritable moteur dans la conduite du changement et dans l'innovation, je cherche constamment à transformer les organisation afin d'accroître la productivité globale. Spécialisé depuis deux ans dans le développement d'applications Shiny, je traite des sujets d'une diversité particulièrement marquée, de la lutte contre la fraude à la conception d'outils de gestion RH."
 output: vitae::twentyseconds
 dummy: "`<style>body {text-align: justify; color: green}</style>`{cat, engine.opts=list(file='header.html')}"
 ---
@@ -36,7 +36,7 @@ library(tibble)
 request <- create_completion(
   engine_id = "text-davinci-002",
   prompt = "Describe Philippe, a data scientist with 8 years of work, interested by innovation, technologies and solving problems",
-  openai_api_key = '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',
+  openai_api_key = 'ENTER YOUR API KEY',
   max_tokens = 200,
   temperature = 1.5
 )
@@ -79,9 +79,10 @@ library(dplyr)
 library(ggplot2)
 library(stringr)
 
-comps <- c("R","Shiny","Python","SAS","SQL","HTML/JS","Economie","Data Science","Anglais")
+comps <- c("R","Shiny","Python","SAS","SQL","HTML/JS","Economie",
+           "Data Science","Anglais","Docker, Kubernetes","Comptabilité")
 
-niv <- c(10,8,7,5,5,3,8,6.5,6)
+niv <- c(10,8,7,5,5,4,8,6.5,6,3,7)
 
 df <- as.data.frame(cbind(comps,niv))
 
@@ -99,7 +100,7 @@ plt <- ggplot(df) +
   # (but it doesn't break long words!)
   geom_col(
     aes(
-      x = reorder(str_wrap(comps, 5), niv),
+      x = reorder(str_wrap(comps, 12), niv),
       y = niv,
       fill = niv
     ),
@@ -111,7 +112,7 @@ plt <- ggplot(df) +
   # Add dots to represent the mean gain
   geom_point(
     aes(
-      x = reorder(str_wrap(comps, 5),niv),
+      x = reorder(str_wrap(comps, 12),niv),
       y = niv
     ),
     size = 3,
@@ -121,9 +122,9 @@ plt <- ggplot(df) +
   # Lollipop shaft for mean gain per region
   geom_segment(
     aes(
-      x = reorder(str_wrap(comps, 5), niv),
+      x = reorder(str_wrap(comps, 12), niv),
       y = 0,
-      xend = reorder(str_wrap(comps, 5), niv),
+      xend = reorder(str_wrap(comps, 12), niv),
       yend = 10
     ),
     linetype = "dashed",
@@ -202,7 +203,7 @@ plt
 <!---
 TODO : generate graph here
 -->
-![Principaux centres d\'intérêts, librement inspiré par Yan Holtz](images/Capture.PNG){width="500" height="341"}]
+![Principaux centres d\'intérêts, librement inspiré par Yan Holtz](images/Capture.PNG){width="500" height="341"}.
 
 # Code source
-Ce CV a été réalisé à l'aide du package [vitae](https://cran.r-project.org/web/packages/vitae/index.html). Le code source associé est disponible sous GitHub.
+Ce CV a été réalisé à l'aide du package [vitae](https://cran.r-project.org/web/packages/vitae/index.html). Le code source associé est disponible sur [GitHub](https://github.com/LFM023/CV).
